@@ -1,13 +1,13 @@
 # -*- mode: ruby -*-
 # vi:set ft=ruby sw=2 ts=2 sts=2:
 
-# Define the number of master and worker nodes
+# Define the number of manager and worker nodes
 # If this number is changed, remember to update setup-hosts.sh script with the new hosts IP details in /etc/hosts of each VM.
-NUM_MASTER_NODE = 1
+NUM_MANAGER_NODE = 1
 NUM_WORKER_NODE = 2
 
 IP_NW = "192.168.56."
-MASTER_IP_START = 1
+MANAGER_IP_START = 1
 NODE_IP_START = 2
 
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
@@ -56,24 +56,24 @@ Vagrant.configure("2") do |config|
   # View the documentation for the provider you are using for more
   # information on available options.
 
-  # Provision Master Nodes
-  (1..NUM_MASTER_NODE).each do |i|
-      config.vm.define "master" do |node|
+  # Provision Manager Nodes
+  (1..NUM_MANAGER_NODE).each do |i|
+      config.vm.define "manager" do |node|
         # Name shown in the GUI
         node.vm.provider "virtualbox" do |vb|
-            vb.name = "master"
+            vb.name = "manager"
             vb.memory = 2048
             vb.cpus = 2
         end
-        node.vm.hostname = "master"
-        node.vm.network :private_network, ip: IP_NW + "#{MASTER_IP_START + i}"
+        node.vm.hostname = "manager"
+        node.vm.network :private_network, ip: IP_NW + "#{MANAGER_IP_START + i}"
         node.vm.network "forwarded_port", guest: 22, host: "#{2710 + i}"
 
         node.vm.provision "setup-hosts", :type => "shell", :path => "ubuntu/vagrant/setup-hosts.sh" do |s|
           s.args = ["enp0s8"]
         end
 
-        node.vm.provision "setup-dns", type: "shell", :path => "ubuntu/update-dns.sh"
+        node.vm.provision "setup-dns", type: "shell", :path => "ubuntu/vagrant/update-dns.sh"
 
       end
   end
@@ -95,7 +95,7 @@ Vagrant.configure("2") do |config|
           s.args = ["enp0s8"]
         end
 
-        node.vm.provision "setup-dns", type: "shell", :path => "ubuntu/update-dns.sh"
+        node.vm.provision "setup-dns", type: "shell", :path => "ubuntu/vagrant/update-dns.sh"
     end
   end
 end
