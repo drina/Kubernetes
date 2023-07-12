@@ -1,6 +1,5 @@
 # Lab 1 - Deploy a Kubernetes Cluster using Kubeadm
 
-
 #### Navigate to the folder where the repository is cloned, then run the following command to check if we are on the right location where the Vagrantfile is:
 
 ```
@@ -19,7 +18,7 @@ vagrant ssh node01
 vagrant ssh node02
 ```
 
-### Next step is to do the necessary preconfigurations and to install a container runtime. We will follow the official Kubernetes documentation:
+### Next step is to do the necessary pre-configurations and to install a container runtime. We will follow the official Kubernetes documentation:
 
 - [Install Kubeadm](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/)
 - [Install a container runtime](https://kubernetes.io/docs/setup/production-environment/container-runtimes/)
@@ -70,7 +69,6 @@ sudo apt-get install containerd.io
 ```
 After installation of containerd we need to [configure the systemd cgrop driver](https://kubernetes.io/docs/setup/production-environment/container-runtimes/#containerd-systemd)
 
-
 **FIRST REMOVE ALL FROM**
 ```bash
 sudo vi /etc/containerd/config.toml
@@ -80,7 +78,9 @@ sudo vi /etc/containerd/config.toml
 [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc]
     [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
     SystemdCgroup = true
-
+```
+After adding and saving we need to restart the service:
+```
 sudo systemctl restart containerd
 ```
 
@@ -98,7 +98,6 @@ sudo apt-mark hold kubelet kubeadm kubectl
 ```
 
 ## [Creating a cluster with kubeadm](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/)
-
 
 **DO THE FOLLOWING STEPS ONLY ON MANAGER NODE!!!**
 
@@ -129,7 +128,7 @@ add in weave container another env variable:
   value: 10.244.0.0/16
 ```
 
-On worker nodes do the join command thet was outputed in 'kubeadm init', it will look something like this:
+On worker nodes do the join command that was outputted in 'kubeadm init', it will look something like this:
 ```bash
 Your Kubernetes control-plane has initialized successfully!
 
@@ -148,3 +147,4 @@ as root:
 
   kubeadm join <control-plane-host>:<control-plane-port> --token <token> --discovery-token-ca-cert-hash sha256:<hash>
 ```
+
