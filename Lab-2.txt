@@ -1,0 +1,111 @@
+https://kubernetes.io/docs/reference/kubectl/cheatsheet/
+https://kubernetes.io/docs/reference/kubectl/conventions/
+
+
+
+****PODS****
+
+How many pods exist on the system in the current (default) namespace?
+
+Create a new pod with the nginx image ( kubectl run --help )
+
+What is the image used to create the new pod myapp-pod? 
+
+Which nodes are these pods placed on? 
+
+How many containers are part of the pod webapp? 
+
+What images are used in the new webapp? 
+
+What is the state of the container agentx in the pod webapp? 
+
+Why do you think the container agentx in pod webapp is in error? Try to figure it out from the event section
+
+What does the READY column in the output of the kubectl get pods command indicate?
+
+Delete the webapp Pod.
+
+Create a new pod with name redis and with the image redis123. Use a pod-definition YAML.
+
+Now change the image on this pod to redis. Once, done the pod should be in a running state.
+note - there two ways to do that
+
+****ReplicaSets****
+
+How many ReplicaSets exist on the system? in the default namespace
+
+How many Pods are DESIRED in the new-replica-set? 
+
+What is the image used to create the pods in the new-replica-set?
+
+How many PODs are READY in the new-replica-set? 
+
+Why do you think the PODs are not ready?
+
+Delete any one of the 4 PODs.
+
+How many PODs exist now?
+
+Create a ReplicaSet using replicaset-definition-1.yaml file. There is an issue with the file, so try to fix it.
+
+Fix the issue in the replicaset-definition-2.yaml file and create a ReplicaSet using it.
+
+Delete the two created ReplicaSets - replicaset-1 and replicaset-2
+
+Fix the original replica set new-replica-set to use the correct busybox image. 
+Either delete and recreate the ReplicaSet or Update the existing and delete all Pods so new ones with the correct image will be created.
+
+Scale the ReplicaSet to 5 PODs. Use kubectl scale command or edit the replicaset using kubectl edit replicaset
+
+Scale the ReplicaSet down to 2 PODs. Use kubectl scale command or edit the replicaset using kubectl edit replicaset
+
+****DEPLOYMENTS****
+
+How many pods
+How many rs
+How many deployments
+
+Deploy frontend-deployment.yaml
+How many deployments
+How many rs
+How many pods
+How many pods are ready?
+What is the image used to create pods?
+What do you think the deployment is not ready?
+
+Create a new Deployment using deployment-definition-1.yaml file. There is an issue with the file.so try to fix it.
+
+Create a new Deployment with the below attributes using your own deployment definition file.
+Name: httpd-forntend;
+Replicas: 3;
+Image: httpd:2.4-alpine
+
+****NAMESPACES****
+NAMESPACE = ISOLATION
+
+How many namespaces exist on the system?
+
+How many pods exist in the kube-system namespace?
+
+Create a POD in the lab namespace. Use the spec given below.
+
+Which namespace has the etcd-manager pod in it?
+
+How to change the current namespace?
+
+
+****SERVICES****
+How maniy Services exist on the system?
+kubectl get service
+kubectl get svc
+This is a default service created by Kubernetes at launch
+
+What is the type of the default kubernetes service?
+
+What is the targetPort configured on the kubernetes service?
+kubectl describe svc kubernetes
+
+How many lables are configured on the kubernetes service?
+
+How many endpoints are attached on the kubernetes service?
+Entpoint basicly means to how many PODS is the service directing trafic to
