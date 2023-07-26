@@ -1,0 +1,194 @@
+apiVersion: v1
+items:
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    creationTimestamp: "2023-07-26T18:51:20Z"
+    generation: 1
+    labels:
+      env: prod
+    name: app-2
+    namespace: default
+    resourceVersion: "960"
+    uid: e20df790-62cb-402e-a73c-8ce2e8fa28dd
+  spec:
+    replicas: 1
+    selector:
+      matchExpressions:
+      - key: bu
+        operator: DoesNotExist
+      matchLabels:
+        env: prod
+        tier: frontend
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          env: prod
+          tier: frontend
+        name: app
+      spec:
+        containers:
+        - command:
+          - sleep
+          - "4800"
+          image: busybox
+          imagePullPolicy: Always
+          name: busybox
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    fullyLabeledReplicas: 1
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    creationTimestamp: "2023-07-26T18:51:21Z"
+    generation: 1
+    labels:
+      env: prod
+    name: db-2
+    namespace: default
+    resourceVersion: "969"
+    uid: 37625bb0-6be0-4265-9d87-f2a4bbe86875
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        env: prod
+        tier: db
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          bu: finance
+          env: prod
+          tier: db
+        name: db
+      spec:
+        containers:
+        - command:
+          - sleep
+          - "4800"
+          image: busybox
+          imagePullPolicy: Always
+          name: busybox
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    fullyLabeledReplicas: 1
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    creationTimestamp: "2023-07-26T18:51:20Z"
+    generation: 1
+    labels:
+      env: dev
+    name: app-1
+    namespace: default
+    resourceVersion: "971"
+    uid: 48f6404e-c10e-4b63-b9b5-26164ee1ec8c
+  spec:
+    replicas: 3
+    selector:
+      matchLabels:
+        env: dev
+        tier: frontend
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          bu: finance
+          env: dev
+          tier: frontend
+        name: app
+      spec:
+        containers:
+        - command:
+          - sleep
+          - "4800"
+          image: busybox
+          imagePullPolicy: Always
+          name: busybox
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 3
+    fullyLabeledReplicas: 3
+    observedGeneration: 1
+    readyReplicas: 3
+    replicas: 3
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    creationTimestamp: "2023-07-26T18:51:20Z"
+    generation: 1
+    labels:
+      env: dev
+    name: db-1
+    namespace: default
+    resourceVersion: "976"
+    uid: 727e3ec0-a4db-4c2e-8e4a-a543c6ac2bc7
+  spec:
+    replicas: 4
+    selector:
+      matchLabels:
+        env: dev
+        tier: db
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          env: dev
+          tier: db
+        name: db
+      spec:
+        containers:
+        - command:
+          - sleep
+          - "4800"
+          image: busybox
+          imagePullPolicy: Always
+          name: busybox
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 4
+    fullyLabeledReplicas: 4
+    observedGeneration: 1
+    readyReplicas: 4
+    replicas: 4
+kind: List
+metadata:
+  resourceVersion: ""
