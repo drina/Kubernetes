@@ -192,3 +192,16 @@ items:
 kind: List
 metadata:
   resourceVersion: ""
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app-1-zzxdf
+  namespace: default
+  labels:
+    bu: finance
+    env: prod
+    tier: frontend
+spec:
+  containers:
+  - image: nginx
+    name: nginx-container
