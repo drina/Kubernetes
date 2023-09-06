@@ -7,7 +7,7 @@ spec:
   - env:
     - name: OVERRIDE_USER
       value: USER30
-    name: name: simple-webapp
+    name: simple-webapp
     image: kodekloud/event-simulator
   - command:
     - sleep
